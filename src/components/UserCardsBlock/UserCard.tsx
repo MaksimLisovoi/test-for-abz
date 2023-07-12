@@ -25,7 +25,9 @@ export const UserCard = ({ user }: any) => {
   return (
     <>
       <Card
+        // raised={true}
         sx={{
+          maxWidth: '340px',
           p: '20px',
           display: 'flex',
           flexDirection: 'column',
@@ -36,14 +38,13 @@ export const UserCard = ({ user }: any) => {
         <Avatar sx={{ width: '70px', height: '70px' }} alt={user.name} src={user.photo} />
         <CardContent
           sx={{
-            // flexDirection: 'column',
-            // justifyContent: 'center',
-            // alignItems: 'center',
+            width: '260px',
             p: '0',
             '&:last-child': { p: '0' },
           }}
         >
           <Typography
+            noWrap={true}
             align="center"
             gutterBottom
             variant="body1"
@@ -56,17 +57,35 @@ export const UserCard = ({ user }: any) => {
           >
             {user.name}
           </Typography>
-          <Box
+          {/* <CardContent
             sx={{
+              width: '260px',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
+              p: '0',
+              '&:last-child': { p: '0' },
             }}
           >
-            <Typography variant="body1">{user.position}</Typography>
-            <Typography variant="body1">{user.email}</Typography>
+            <Typography noWrap={true} variant="body1">
+              {user.position}
+            </Typography>
+            <Typography noWrap={true} variant="body1">
+              {user.email}
+            </Typography>
             <Typography variant="body1">{user.phone}</Typography>
+          </CardContent> */}
+          <Box>
+            <Typography align="center" noWrap={true} variant="body1">
+              {user.position}
+            </Typography>
+            <Typography align="center" noWrap={true} variant="body1">
+              {user.email}
+            </Typography>
+            <Typography align="center" noWrap={true} variant="body1">
+              {user.phone}
+            </Typography>
           </Box>
         </CardContent>
       </Card>

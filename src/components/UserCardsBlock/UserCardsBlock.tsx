@@ -3,6 +3,7 @@ import { UserCard } from './UserCard';
 import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { useEffect, useState } from 'react';
 import { getUsersList } from '../../services/userApi';
+import { ButtonPrimary } from '../Base.styled';
 
 export const UserCardsBlock = (): JSX.Element => {
   const [pageState, setPageState] = useState({
@@ -16,16 +17,24 @@ export const UserCardsBlock = (): JSX.Element => {
 
   useEffect(() => {
     getUsersList(page, count).then(({ users }) =>
-      setPageState(prevState => ({ ...prevState, users })),
+      setPageState(prevState => ({ ...prevState, users: users })),
     );
   }, [page, count]);
 
-  useEffect(() => {
-    getUsersList(page, count).then(data => console.log(data));
-  }, [page, count]);
+  const handleShowMore = () => {
+    setPageState(prevState => ({ ...prevState, page: prevState.page + 1 }));
+  };
 
   return (
-    <Box pb="50px">
+    <Box
+      pb="50px"
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <Grid2 container spacing={'16px'}>
         {users &&
           users.map(user => (
@@ -34,6 +43,9 @@ export const UserCardsBlock = (): JSX.Element => {
             </Grid2>
           ))}
       </Grid2>
+      <ButtonPrimary onClick={handleShowMore} sx={{ mt: '50px' }} variant="contained">
+        ShowMore
+      </ButtonPrimary>
     </Box>
   );
 };

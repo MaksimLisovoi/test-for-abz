@@ -1,5 +1,6 @@
 import { Box, Container, styled } from '@mui/system';
 import HeroImg from '../assets/pexels-alexandr-podvalny-1227513.jpeg';
+import { Button } from '@mui/material';
 export const BaseContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     paddingRight: '16px',
@@ -42,7 +43,7 @@ export const HeroTextBlock = styled('div')(({ theme }) => ({
   },
 }));
 
-export const Background = styled(Box)(() => ({
+export const Background = styled(BaseContainer)(() => ({
   width: '100%',
   height: '100%',
 
@@ -53,4 +54,14 @@ export const Background = styled(Box)(() => ({
   backgroundPosition: 'center',
   backgroundSize: 'cover',
   backgroundRepeat: 'no-repeat',
+}));
+
+export const ButtonPrimary = styled(Button)(() => ({
+  lineHeight: '1.625',
+  minWidth: '100px',
+  p: '4px 0',
+  fontWeight: 400,
+  borderRadius: '80px',
+  textTransform: 'none',
+  '&:not(:last-child)': { mr: '10px' },
 }));
