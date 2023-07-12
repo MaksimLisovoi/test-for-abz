@@ -1,9 +1,8 @@
-import { Button, Link, Toolbar } from '@mui/material';
+import { Link, Toolbar } from '@mui/material';
 
-import { NavLink } from 'react-router-dom';
-import { Box, borderRadius } from '@mui/system';
+import { Box } from '@mui/system';
 import Logo from '../../assets/logo.svg';
-import { ButtonPrimary } from '../ButtonPrimary/ButtonPrimary';
+import { ButtonPrimary } from '../Base.styled';
 
 export const Nav = () => {
   return (
@@ -36,8 +35,12 @@ export const Nav = () => {
         />
       </Link>
       <Box display={'flex'}>
-        <ButtonPrimary text="Users" />
-        <ButtonPrimary text="SignUp" />
+        <ButtonPrimary sx={{ '&:not(:last-child)': { mr: '10px' } }} variant="contained">
+          Users
+        </ButtonPrimary>
+        <ButtonPrimary sx={{ '&:not(:last-child)': { mr: '10px' } }} variant="contained">
+          SignUp
+        </ButtonPrimary>
       </Box>
     </Toolbar>
   );

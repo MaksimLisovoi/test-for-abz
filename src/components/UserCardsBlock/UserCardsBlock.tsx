@@ -4,9 +4,10 @@ import Grid2 from '@mui/material/Unstable_Grid2/Grid2';
 import { useEffect, useState } from 'react';
 import { getUsersList } from '../../services/userApi';
 import { ButtonPrimary } from '../Base.styled';
+import { UserState } from '../../types';
 
 export const UserCardsBlock = (): JSX.Element => {
-  const [pageState, setPageState] = useState({
+  const [pageState, setPageState] = useState<UserState>({
     page: 1,
     count: 6,
     users: [],
@@ -17,13 +18,15 @@ export const UserCardsBlock = (): JSX.Element => {
 
   useEffect(() => {
     getUsersList(page, count).then(({ users }) =>
-      setPageState(prevState => ({ ...prevState, users: users })),
+      setPageState(prevState => ({ ...prevState, users: [...prevState.users, ...users] })),
     );
   }, [page, count]);
 
   const handleShowMore = () => {
     setPageState(prevState => ({ ...prevState, page: prevState.page + 1 }));
   };
+
+  console.log(users);
 
   return (
     <Box

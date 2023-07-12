@@ -1,4 +1,4 @@
-import { Box, Container, styled } from '@mui/system';
+import { Container, styled } from '@mui/system';
 import HeroImg from '../assets/pexels-alexandr-podvalny-1227513.jpeg';
 import { Button } from '@mui/material';
 export const BaseContainer = styled(Container)(({ theme }) => ({
@@ -63,5 +63,4 @@ export const ButtonPrimary = styled(Button)(() => ({
   fontWeight: 400,
   borderRadius: '80px',
   textTransform: 'none',
-  '&:not(:last-child)': { mr: '10px' },
 }));

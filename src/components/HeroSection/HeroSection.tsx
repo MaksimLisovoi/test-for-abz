@@ -1,7 +1,6 @@
 import { Typography } from '@mui/material';
-import { Background, BaseContainer, HeroTextBlock } from '../Base.styled';
-import { Box } from '@mui/system';
-import { useTheme } from '@mui/material/styles';
+import { Background, HeroTextBlock } from '../Base.styled';
+
 import { ButtonPrimary } from '../ButtonPrimary';
 
 // const styles = theme => ({
@@ -17,13 +16,6 @@ import { ButtonPrimary } from '../ButtonPrimary';
 
 export const HeroSection = () => {
   return (
-    // <BaseContainer
-    //   sx={{
-    //     display: 'flex',
-    //     flexDirection: 'column',
-    //     justifyContent: 'center',
-    //   }}
-    // >
     <Background
       sx={{
         display: 'flex',
@@ -44,6 +36,5 @@ export const HeroSection = () => {
         <ButtonPrimary text="SignUp" />
       </HeroTextBlock>
     </Background>
-    // </BaseContainer>
   );
 };

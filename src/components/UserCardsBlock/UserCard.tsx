@@ -3,25 +3,12 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 
 import Typography from '@mui/material/Typography';
-import MyAvatar from '../../assets/photo-cover.svg';
+import DefaultAvatar from '../../assets/photo-cover.svg';
 import { Avatar } from '@mui/material';
 import { Box } from '@mui/system';
+import { UserCardType } from '../../types';
 
-type User = {
-  email: string;
-  id: number;
-  name: string;
-  phone: string;
-  photo: string;
-  position: string;
-  position_id: number;
-  registration_timestamp: number;
-};
-
-type UserCard = { user: User };
-
-export const UserCard = ({ user }: any) => {
-  console.log(user);
+export const UserCard = ({ user }: UserCardType) => {
   return (
     <>
       <Card
@@ -35,7 +22,11 @@ export const UserCard = ({ user }: any) => {
           alignItems: 'center',
         }}
       >
-        <Avatar sx={{ width: '70px', height: '70px' }} alt={user.name} src={user.photo} />
+        <Avatar
+          sx={{ width: '70px', height: '70px' }}
+          alt={user.name}
+          src={user.photo || DefaultAvatar}
+        />
         <CardContent
           sx={{
             width: '260px',

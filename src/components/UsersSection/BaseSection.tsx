@@ -1,4 +1,4 @@
-import { Box, useTheme } from '@mui/system';
+import { Box } from '@mui/system';
 import { BaseContainer } from '../Base.styled';
 import { Typography } from '@mui/material';
 
