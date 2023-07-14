@@ -6,15 +6,29 @@ import '@fontsource/nunito/400.css';
 import './index.css';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 
-// declare module '@mui/material/styles' {
-//   interface SimplePaletteColorOptions {
-//     tableBg: string;
-//     border: string;
-//     accent: string;
-//     textColor: string;
-//     aqua: string;
-//   }
-// }
+declare module '@mui/material/styles' {
+  interface SimplePaletteColorOptions {
+    heroTextColor?: string;
+    accent?: string;
+  }
+}
+
+declare module '@mui/material/styles' {
+  interface Palette {
+    custom: Palette['primary'];
+  }
+
+  // allow configuration using `createTheme`
+  interface PaletteOptions {
+    custom?: PaletteOptions['primary'];
+  }
+}
+
+declare module '@mui/material/Button' {
+  interface ButtonPropsColorOverrides {
+    custom: true;
+  }
+}
 
 // const darkTheme = createTheme({
 //   palette: {
@@ -41,16 +55,22 @@ let theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#f4e041',
+      main: '#7E7E7',
     },
     secondary: {
-      main: '#00BDD3',
+      main: '#fff',
     },
     background: {
       default: '#F8F8F8',
     },
     text: {
-      secondary: '#FFF',
+      primary: 'rgba(0, 0, 0, 0.87)',
+      // secondary: 'rgba(0, 0, 0, 0.87)',
+    },
+    custom: {
+      main: '#F4E041',
+      heroTextColor: '#fff',
+      accent: '#00BDD3',
     },
   },
 

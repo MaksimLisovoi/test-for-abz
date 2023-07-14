@@ -1,6 +1,8 @@
 import { Container, styled } from '@mui/system';
 import HeroImg from '../assets/pexels-alexandr-podvalny-1227513.jpeg';
 import { Button } from '@mui/material';
+import Card from '@mui/material/Card';
+
 export const BaseContainer = styled(Container)(({ theme }) => ({
   [theme.breakpoints.up('sm')]: {
     paddingRight: '16px',
@@ -21,7 +23,7 @@ export const BaseContainer = styled(Container)(({ theme }) => ({
 }));
 
 export const HeroTextBlock = styled('div')(({ theme }) => ({
-  color: `${theme.palette.text.secondary}`,
+  color: `${theme.palette.custom.heroTextColor}`,
   maxWidth: '380px',
   marginRight: 'auto',
   marginLeft: 'auto',
@@ -43,6 +45,19 @@ export const HeroTextBlock = styled('div')(({ theme }) => ({
   },
 }));
 
+export const UserStyledCard = styled(Card)(({ theme }) => ({
+  margin: '0 auto',
+  padding: '20px',
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
+  alignItems: 'center',
+
+  [theme.breakpoints.down('md')]: {
+    maxWidth: '360px',
+  },
+}));
+
 export const Background = styled(BaseContainer)(() => ({
   width: '100%',
   height: '100%',
@@ -56,10 +71,11 @@ export const Background = styled(BaseContainer)(() => ({
   backgroundRepeat: 'no-repeat',
 }));
 
-export const ButtonPrimary = styled(Button)(() => ({
+export const ButtonPrimary = styled(Button)(({ theme }) => ({
+  backgroundColor: `${theme.palette.custom.main}`,
   lineHeight: '1.625',
   minWidth: '100px',
-  p: '4px 0',
+  padding: '4px 0',
   fontWeight: 400,
   borderRadius: '80px',
   textTransform: 'none',

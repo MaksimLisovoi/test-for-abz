@@ -38,7 +38,11 @@ export const UserCardsBlock = (): JSX.Element => {
         alignItems: 'center',
       }}
     >
-      <Grid2 container spacing={'16px'}>
+      <Grid2
+        container
+        columnSpacing={{ xs: '20px', md: '16px', lg: '29px' }}
+        rowSpacing={{ xs: '20px', md: '16px', lg: '29px' }}
+      >
         {users &&
           users.map(user => (
             <Grid2 xs={12} md={6} lg={4}>

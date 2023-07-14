@@ -14,6 +14,21 @@ export type UserCardType = { user: User };
 export type UserState = {
   page: number;
   count: number;
-  users: User[];
+  users: User[] | [];
   isLoading: boolean;
+};
+
+export type Position = {
+  id: string;
+  name: string;
+};
+
+export type PositionsState = Position[] | [];
+
+export type createNewUserType = {
+  name: FormDataEntryValue | null;
+  email: FormDataEntryValue | null;
+  phone: FormDataEntryValue | null;
+  position_id: number;
+  photo: string;
 };

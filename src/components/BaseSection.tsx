@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import { BaseContainer } from '../Base.styled';
+import { BaseContainer } from './Base.styled';
 import { Typography } from '@mui/material';
 
 type SectionProps = {

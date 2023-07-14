@@ -7,20 +7,22 @@ import DefaultAvatar from '../../assets/photo-cover.svg';
 import { Avatar } from '@mui/material';
 import { Box } from '@mui/system';
 import { UserCardType } from '../../types';
+import { UserStyledCard } from '../Base.styled';
+
+// const styles = theme => ({
+//   card: {
+//     [theme.breakpoints.up('md')]: {
+//       paddingRight: '32px',
+//       paddingLeft: '32px',
+//     },
+//   },
+// });
 
 export const UserCard = ({ user }: UserCardType) => {
   return (
     <>
-      <Card
-        // raised={true}
-        sx={{
-          maxWidth: '340px',
-          p: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
+      <UserStyledCard
+      // raised={true}
       >
         <Avatar
           sx={{ width: '70px', height: '70px' }}
@@ -48,25 +50,7 @@ export const UserCard = ({ user }: UserCardType) => {
           >
             {user.name}
           </Typography>
-          {/* <CardContent
-            sx={{
-              width: '260px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-              p: '0',
-              '&:last-child': { p: '0' },
-            }}
-          >
-            <Typography noWrap={true} variant="body1">
-              {user.position}
-            </Typography>
-            <Typography noWrap={true} variant="body1">
-              {user.email}
-            </Typography>
-            <Typography variant="body1">{user.phone}</Typography>
-          </CardContent> */}
+
           <Box>
             <Typography align="center" noWrap={true} variant="body1">
               {user.position}
@@ -79,7 +63,7 @@ export const UserCard = ({ user }: UserCardType) => {
             </Typography>
           </Box>
         </CardContent>
-      </Card>
+      </UserStyledCard>
     </>
   );
 };
