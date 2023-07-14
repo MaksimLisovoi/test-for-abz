@@ -32,3 +32,11 @@ export type createNewUserType = {
   position_id: number;
   photo: string;
 };
+
+export type formUserType = {
+  name: string;
+  email: string;
+  phone: string;
+  position_id: number;
+  photo: string;
+};
