@@ -19,7 +19,7 @@ export type UserState = {
 };
 
 export type Position = {
-  id: string;
+  id: number;
   name: string;
 };
 
@@ -30,13 +30,13 @@ export type createNewUserType = {
   email: FormDataEntryValue | null;
   phone: FormDataEntryValue | null;
   position_id: number;
-  photo: string;
+  photo: FileList;
 };
 
 export type formUserType = {
   name: string;
   email: string;
   phone: string;
-  position_id: number;
-  photo: string;
+  position_id: string;
+  photo: Blob;
 };

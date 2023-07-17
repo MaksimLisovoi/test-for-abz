@@ -26,8 +26,6 @@ export const UserCardsBlock = (): JSX.Element => {
     setPageState(prevState => ({ ...prevState, page: prevState.page + 1 }));
   };
 
-  console.log(users);
-
   return (
     <Box
       pb="50px"

@@ -1,62 +1,45 @@
-import { Button, FormControl } from '@mui/base';
-import { FormControlLabel, FormLabel, Input, RadioGroup, TextField } from '@mui/material';
-import { Box, useTheme } from '@mui/system';
+import { FormControl } from '@mui/base';
+import {
+  FormControlLabel,
+  FormLabel,
+  Input,
+  RadioGroup,
+  TextField,
+  Button,
+  OutlinedInput,
+  FormHelperText,
+} from '@mui/material';
+import { Box, styled, useTheme } from '@mui/system';
 import { ButtonPrimary } from '../Base.styled';
 import { useEffect, useState, ChangeEvent } from 'react';
-import { createNewUser, getPositions } from '../../services/userApi';
+import { createNewUser, getPositions, getToken } from '../../services/userApi';
 import { PositionsState, createNewUserType } from '../../types';
 import { CustomRadioBtn } from '../CustomRadioBtn';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { object, any, string, TypeOf } from 'zod';
+import { TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { registerSchema } from '../../services/validation';
 
-import * as regex from '../../constants/regexes';
-
-const MAX_FILE_SIZE = 5000000;
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg'];
-
-const registerSchema = object({
-  name: string()
-    .nonempty('Name is required')
-    .min(2, 'Name must be at least 2 characters')
-    .max(60, 'Name must be less than 60 characters'),
-  email: string()
-    .nonempty('Email is required')
-    .regex(regex.emailRegex, 'HEY! Email is invalid ')
-    .email('Email is invalid'),
-  phone: string().regex(regex.phoneRegex, 'Number format should be +38 (XXX) XXX - XX - XX'),
-  position_id: string(),
-  photo: any(),
-  // .refine(file => file?.size <= MAX_FILE_SIZE, `Max image size is 5MB.`)
-  // .refine(
-  //   file => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-  //   'Only .jpg, .jpeg formats are supported.',
-  // ),
-});
 type RegisterInput = TypeOf<typeof registerSchema>;
 
+const inputStyles = {
+  marginBottom: '50px',
+  '.MuiInputBase-input': { padding: '16px 14px' },
+  '.MuiFormHelperText-root': {
+    mt: '4px',
+    mb: ' 0',
+    ml: '16px',
+    fontSize: '12px',
+    lineHeight: '1.16',
+  },
+};
+
 export const SignUpForm = (): JSX.Element => {
-  const [file, setFile] = useState<File>();
-
-  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      console.log(e.target.files[0]);
-      setFile(e.target.files[0]);
-    }
-  };
-
-  const handleUploadClick = () => {
-    if (!file) {
-      return;
-    }
-    console.log(file);
-  };
-
+  const theme = useTheme();
+  const [file, setFile] = useState<File | null>(null);
   const [positions, setPositions] = useState<PositionsState>([]);
   const [positionValue, setPositionValue] = useState<number>(1);
-
-  const [loading, setLoading] = useState(false);
 
   const {
     register,
@@ -68,6 +51,16 @@ export const SignUpForm = (): JSX.Element => {
   });
 
   const { onChange, ref } = register('photo');
+
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    if (e.target.files) {
+      console.log(e.target.files[0]);
+      setFile(e.target.files[0]);
+    }
+  };
+
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (isSubmitSuccessful) {
@@ -84,25 +77,17 @@ export const SignUpForm = (): JSX.Element => {
     setPositionValue(Number((event.target as HTMLInputElement).value));
   };
 
-  const onSubmitHandler: SubmitHandler<RegisterInput> = values => {
-    console.log(values);
-    // createNewUser(values);
+  const onSubmitHandler: SubmitHandler<RegisterInput> = data => {
+    const formData = new FormData();
+    formData.append('name', data.name);
+    formData.append('email', data.email);
+    formData.append('phone', data.phone);
+    formData.append('position_id', data.position_id);
+    formData.append('photo', data.photo[0]);
+
+    // getToken().then(token => createNewUser(formData, token));
   };
   console.log(errors);
-
-  const theme = useTheme();
-
-  const inputStyles = {
-    marginBottom: '50px',
-    '.MuiInputBase-input': { padding: '16px 14px' },
-    '.MuiFormHelperText-root': {
-      mt: '0',
-      mb: ' 0',
-      ml: '16px',
-      fontSize: ' 12px',
-      lineHeight: '1.16',
-    },
-  };
 
   return (
     <Box
@@ -148,51 +133,88 @@ export const SignUpForm = (): JSX.Element => {
         helperText={errors['phone'] ? errors['phone'].message : '+38 (XXX) XXX - XX - XX'}
         {...register('phone')}
       />
+      <Box sx={{ mb: '47px' }}>
+        <FormControl>
+          <FormLabel id="demo-controlled-radio-buttons-group">Select your position</FormLabel>
+          <RadioGroup
+            aria-labelledby="demo-controlled-radio-buttons-group"
+            name="controlled-radio-buttons-group"
+            // defaultChecked={true}
+            defaultValue={1}
+            value={positionValue ? positionValue : 1}
+            onChange={handleRadioChange}
+          >
+            {positions &&
+              positions.map(position => (
+                <FormControlLabel
+                  {...register('position_id')}
+                  key={position.id}
+                  value={position.id}
+                  control={
+                    <CustomRadioBtn
+                      sx={{
+                        '& .MuiSvgIcon-root': {
+                          fontSize: 20,
+                        },
+                        '&.Mui-checked': {
+                          color: `${theme.palette.custom.accent}`,
+                        },
+                      }}
+                    />
+                  }
+                  label={position.name}
+                />
+              ))}
+          </RadioGroup>
+        </FormControl>
+      </Box>
+      <Box sx={{ display: 'flex', mb: '50px' }}>
+        <Input
+          {...register('photo')}
+          ref={ref}
+          type="file"
+          id="selectImage"
+          onChange={handleFileChange}
+          sx={{
+            display: 'none',
+          }}
+        />
+        <label htmlFor="selectImage">
+          <Button
+            sx={{
+              height: '100%',
+              boxShadow: 'none',
+              borderRadius: '4px 0px 0px 4px',
+              border: '1px solid rgba(0, 0, 0, 0.87)',
+              textTransform: 'capitalize',
+            }}
+            variant="contained"
+            component="span"
+          >
+            Upload
+          </Button>
+        </label>
+        <OutlinedInput
+          sx={{
+            width: '100%',
+            borderRadius: '0px 4px 4px  0px ',
+            '.MuiInputBase-input': { padding: '16px 14px' },
+          }}
+          value={file?.name}
+          readOnly
+          placeholder="Upload Your photo"
+          error={!!errors['photo']}
+        />
 
-      <FormControl>
-        <FormLabel id="demo-controlled-radio-buttons-group">Select your position</FormLabel>
-        <RadioGroup
-          aria-labelledby="demo-controlled-radio-buttons-group"
-          name="controlled-radio-buttons-group"
-          // defaultChecked={true}
-          defaultValue={1}
-          value={positionValue ? positionValue : 1}
-          onChange={handleRadioChange}
-        >
-          {positions &&
-            positions.map(position => (
-              <FormControlLabel
-                {...register('position_id')}
-                key={position.id}
-                value={position.id}
-                control={
-                  <CustomRadioBtn
-                    sx={{
-                      '& .MuiSvgIcon-root': {
-                        fontSize: 20,
-                      },
-                      '&.Mui-checked': {
-                        color: `${theme.palette.custom.accent}`,
-                      },
-                    }}
-                  />
-                }
-                label={position.name}
-              />
-            ))}
-        </RadioGroup>
-      </FormControl>
+        <FormHelperText error id="selectImage-error" />
+      </Box>
 
-      <div>
-        <label {...register('photo')}>Any file (...register):</label>
-        <Input ref={ref} type="file" onChange={handleFileChange} />
-
-        <div>{file && `${file.name} - ${file.type}`}</div>
-
-        <button onClick={handleUploadClick}>Upload</button>
-      </div>
-
-      <ButtonPrimary type="submit" variant="contained" sx={{ mt: '50px', margin: '0 auto' }}>
+      <ButtonPrimary
+        disabled={!errors}
+        type="submit"
+        variant="contained"
+        sx={{ mt: '50px', margin: '0 auto' }}
+      >
         Sign Up
       </ButtonPrimary>
     </Box>
