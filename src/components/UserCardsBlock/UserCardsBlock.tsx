@@ -9,14 +9,13 @@ import { useSuccessForm } from '../../context/submitFormCotext';
 import { Loader } from '../Loader/Loader';
 
 export const UserCardsBlock = (): JSX.Element => {
-  const { isMySuccessSubmit, setSubmitSuccessFalse } = useSuccessForm();
-  // const { pageState, setPageState } = useUserCardsState();
+  const { isMySuccessSubmit } = useSuccessForm();
 
   const [pageState, setPageState] = useState<UserState>({
     page: 1,
     count: 6,
     users: [],
-    isLoading: false,
+    isLoading: true,
     nextLink: '',
   });
 
@@ -26,11 +25,15 @@ export const UserCardsBlock = (): JSX.Element => {
 
   useEffect(() => {
     getUsersList(page, count).then(data => {
-      setPageState(prevState => ({
-        ...prevState,
-        users: [...prevState.users, ...data.users],
-        nextLink: data.links.next_url,
-      }));
+      console.log(data);
+      if (data.success) {
+        setPageState(prevState => ({
+          ...prevState,
+          users: [...prevState.users, ...data.users],
+          nextLink: data.links.next_url,
+          isLoading: false,
+        }));
+      }
     });
   }, [page, count]);
 

@@ -1,5 +1,8 @@
 import { Container, styled } from '@mui/system';
-import HeroImg from '../assets/pexels-alexandr-podvalny-1227513.jpeg';
+
+import HeroMob from '../assets/image360.jpg';
+import HeroTablet from '../assets/image1024.jpg';
+import HeroDesktop from '../assets/image1170.jpg';
 import { Button } from '@mui/material';
 import Card from '@mui/material/Card';
 
@@ -21,6 +24,21 @@ export const BaseContainer = styled(Container)(({ theme }) => ({
     paddingLeft: '0',
   },
 }));
+export const Background = styled(BaseContainer)(({ theme }) => ({
+  width: '100%',
+  height: '100%',
+  backgroundImage: ` linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${HeroMob})`,
+  [theme.breakpoints.up('md')]: {
+    backgroundImage: `url(linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%),${HeroTablet})`,
+  },
+  [theme.breakpoints.up('lg')]: {
+    backgroundImage: `url(linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%),${HeroDesktop})`,
+  },
+
+  backgroundPosition: 'center',
+  backgroundSize: 'cover',
+  backgroundRepeat: 'no-repeat',
+}));
 
 export const HeroTextBlock = styled('div')(({ theme }) => ({
   color: `${theme.palette.custom.heroTextColor}`,
@@ -33,7 +51,7 @@ export const HeroTextBlock = styled('div')(({ theme }) => ({
   flexDirection: 'column',
   [theme.breakpoints.up('sm')]: {
     marginTop: '40px',
-    marginBottom: '40px',
+    marginBottom: '71px',
   },
   [theme.breakpoints.up('md')]: {
     marginTop: '90px',
@@ -56,19 +74,6 @@ export const UserStyledCard = styled(Card)(({ theme }) => ({
   [theme.breakpoints.down('md')]: {
     maxWidth: '360px',
   },
-}));
-
-export const Background = styled(BaseContainer)(() => ({
-  width: '100%',
-  height: '100%',
-
-  // background:
-  // 'linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(`${HeroImg}`), lightgray -952.661px -317.009px / 342.315% 164.03% no-repeat',
-  // backgroundColor: 'linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%)',
-  backgroundImage: ` linear-gradient(0deg, rgba(0, 0, 0, 0.50) 0%, rgba(0, 0, 0, 0.50) 100%), url(${HeroImg})`,
-  backgroundPosition: 'center',
-  backgroundSize: 'cover',
-  backgroundRepeat: 'no-repeat',
 }));
 
 export const ButtonPrimary = styled(Button)(({ theme }) => ({

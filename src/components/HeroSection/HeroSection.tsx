@@ -3,16 +3,7 @@ import { Background, HeroTextBlock } from '../Base.styled';
 
 import { ButtonPrimary } from '../ButtonPrimary';
 
-// const styles = theme => ({
-//   root: {
-//     backgroundColor: 'blue',
-//     // Match [md, ∞)
-//     //       [900px, ∞)
-//     [theme.breakpoints.up('md')]: {
-//       backgroundColor: 'red',
-//     },
-//   },
-// });
+import './background.css';
 
 export const HeroSection = () => {
   return (

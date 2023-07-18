@@ -12,6 +12,7 @@ import { PositionsBlock } from './PositionsBlock';
 import { FileInputBlock } from './FileInputBlock';
 import { SuccessImage } from './SuccessImage';
 import { useSuccessForm } from '../../context/submitFormCotext';
+import { createNewUser, getToken } from '../../services/userApi';
 
 type RegisterInput = TypeOf<typeof registerSchema>;
 
@@ -46,7 +47,7 @@ export const SignUpForm = (): JSX.Element => {
     formData.append('photo', data.photo[0]);
     setSubmitSuccessTrue();
     setShouldShowImg(true);
-    // getToken().then(token => createNewUser(formData, token));
+    getToken().then(token => createNewUser(formData, token));
   };
 
   return (
