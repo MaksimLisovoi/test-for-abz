@@ -1,5 +1,4 @@
 import { Box, TextField } from '@mui/material';
-import { FieldErrors, UseFormRegister } from 'react-hook-form';
 import { TextFieldBlockProps } from '../../types';
 
 const inputStyles = {

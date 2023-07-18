@@ -1,10 +1,7 @@
-import { Input, Button, OutlinedInput, FormHelperText, Typography } from '@mui/material';
-import { Box, styled, useTheme } from '@mui/system';
+import { Typography } from '@mui/material';
+import { Box } from '@mui/system';
 import { ButtonPrimary } from '../Base.styled';
-import { useEffect, useState, ChangeEvent } from 'react';
-import { createNewUser, getPositions, getToken } from '../../services/userApi';
-import { PositionsState, createNewUserType } from '../../types';
-import { CustomRadioBtn } from '../CustomRadioBtn';
+import { useEffect, useState } from 'react';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { TypeOf } from 'zod';
@@ -19,10 +16,10 @@ import { useSuccessForm } from '../../context/submitFormCotext';
 type RegisterInput = TypeOf<typeof registerSchema>;
 
 export const SignUpForm = (): JSX.Element => {
-  const { isMySuccessSubmit, setSubmitSuccessTrue, setSubmitSuccessFalse } = useSuccessForm();
+  const { setSubmitSuccessTrue } = useSuccessForm();
   const [shouldShowImg, setShouldShowImg] = useState(false);
-  const [loading, setLoading] = useState(false);
-  // const [isSuccess, setisSuccess] = useState(false);
+  // const [loading, setLoading] = useState(false);
+
   const {
     register,
     formState: { errors, isSubmitSuccessful, isValid },

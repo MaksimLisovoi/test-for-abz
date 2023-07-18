@@ -1,5 +1,5 @@
 import { Box, useTheme } from '@mui/system';
-import { TextFieldBlockProps, fileBlockProps } from '../../types';
+import { fileBlockProps } from '../../types';
 import { Input, Button, OutlinedInput, FormHelperText } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 

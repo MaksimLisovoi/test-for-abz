@@ -4,21 +4,19 @@ import './index.css';
 import { App } from './components/App/App';
 import '@fontsource/nunito/400.css';
 import './index.css';
-import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { theme } from './constants/theme';
 import { SuccessFormProvider } from './context/submitFormCotext';
-import { CardsStateProvider } from './context/UserCardsStateContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <CardsStateProvider>
-        <SuccessFormProvider>
-          <App />
-        </SuccessFormProvider>
-      </CardsStateProvider>
+
+      <SuccessFormProvider>
+        <App />
+      </SuccessFormProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );

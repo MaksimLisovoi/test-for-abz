@@ -1,5 +1,5 @@
 import { FormControl, FormControlLabel, FormLabel, RadioGroup } from '@mui/material';
-import { Box, styled, useTheme } from '@mui/system';
+import { Box, useTheme } from '@mui/system';
 import { useEffect, useState } from 'react';
 import { getPositions } from '../../services/userApi';
 import { CustomRadioBtn } from '../CustomRadioBtn';

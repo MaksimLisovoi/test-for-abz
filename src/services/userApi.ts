@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as errorCatcher from './helperFuncs';
-import { createNewUserType, formUserType } from '../types';
 
 let baseUrl = `https://frontend-test-assignment-api.abz.agency/api/v1`;
 

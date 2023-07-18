@@ -7,7 +7,6 @@ import { ButtonPrimary } from '../Base.styled';
 import { UserState } from '../../types';
 import { useSuccessForm } from '../../context/submitFormCotext';
 import { Loader } from '../Loader/Loader';
-import { useUserCardsState } from '../../context/UserCardsStateContext';
 
 export const UserCardsBlock = (): JSX.Element => {
   const { isMySuccessSubmit, setSubmitSuccessFalse } = useSuccessForm();

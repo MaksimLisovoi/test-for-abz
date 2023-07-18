@@ -1,7 +1,4 @@
-import Card from '@mui/material/Card';
-
 import CardContent from '@mui/material/CardContent';
-
 import Typography from '@mui/material/Typography';
 import DefaultAvatar from '../../assets/photo-cover.svg';
 import { Avatar } from '@mui/material';
@@ -21,9 +18,7 @@ import { UserStyledCard } from '../Base.styled';
 export const UserCard = ({ user }: UserCardType) => {
   return (
     <>
-      <UserStyledCard
-      // raised={true}
-      >
+      <UserStyledCard>
         <Avatar
           sx={{ width: '70px', height: '70px' }}
           alt={user.name}
