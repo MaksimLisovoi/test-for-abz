@@ -11,10 +11,10 @@ export const App = () => {
       <AppBar />
       <Box component="main" sx={{ pb: '140px' }}>
         <HeroSection />
-        <BaseSection heading="Working with GET request">
+        <BaseSection id="users" heading="Working with GET request">
           <UserCardsBlock />
         </BaseSection>
-        <BaseSection heading="Working with POST request">
+        <BaseSection id="sign-up">
           <SignUpForm />
         </BaseSection>
       </Box>

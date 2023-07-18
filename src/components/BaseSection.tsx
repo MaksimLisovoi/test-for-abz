@@ -3,17 +3,24 @@ import { BaseContainer } from './Base.styled';
 import { Typography } from '@mui/material';
 
 type SectionProps = {
-  heading: string;
+  heading?: string;
+  id?: string;
   children?: any;
 };
 
-export const BaseSection = ({ heading = '', children }: SectionProps) => {
+export const BaseSection = ({ heading = '', children, id = '' }: SectionProps) => {
   //   const theme = useTheme();
   return (
-    <Box component="section" mt="140px">
+    <Box component="section" mt="140px" id={id}>
       <BaseContainer>
         <Box sx={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-          <Typography align="center" variant="h1" component="h2" mb="50px">
+          <Typography
+            sx={{ display: heading === '' ? 'none' : '' }}
+            align="center"
+            variant="h1"
+            component="h2"
+            mb="50px"
+          >
             {heading}
           </Typography>
           {children}

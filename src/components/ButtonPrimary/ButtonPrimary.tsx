@@ -3,14 +3,16 @@ import { useTheme } from '@mui/system';
 
 type ButtonProps = {
   text: string;
+  href: string;
 };
 
-export const ButtonPrimary = ({ text }: ButtonProps) => {
+export const ButtonPrimary = ({ text, href = '' }: ButtonProps) => {
   const theme = useTheme();
   return (
     <Button
       variant="contained"
       component={Link}
+      href={href}
       sx={{
         // pr: '29px',
         // pl: '29px',

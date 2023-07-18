@@ -4,9 +4,10 @@ import { Box } from '@mui/system';
 type LoaderProps = {
   height?: string;
   size?: number;
+  color?: string;
 };
 
-export const Loader = ({ height, size = 40 }: LoaderProps) => {
+export const Loader = ({ height, size = 40, color }: LoaderProps) => {
   return (
     <Box
       sx={{
@@ -14,6 +15,7 @@ export const Loader = ({ height, size = 40 }: LoaderProps) => {
         justifyContent: 'center',
         alignItems: 'center',
         height: { height },
+        color: { color },
       }}
     >
       <CircularProgress size={size} />

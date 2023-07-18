@@ -33,7 +33,7 @@ export const HeroSection = () => {
           with accessibility in mind. They should also be excited to learn, as the world of
           Front-End Development keeps evolving.
         </Typography>
-        <ButtonPrimary text="SignUp" />
+        <ButtonPrimary href="#sign-up" text="SignUp"></ButtonPrimary>
       </HeroTextBlock>
     </Background>
   );

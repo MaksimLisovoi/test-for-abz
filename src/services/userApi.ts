@@ -6,8 +6,8 @@ let baseUrl = `https://frontend-test-assignment-api.abz.agency/api/v1`;
 
 export async function getUsersList(page: number, offset: number) {
   try {
-    const allUsers = await axios.get(`${baseUrl}/users?page=${page}&count=${offset}`);
-    return allUsers.data;
+    const { data } = await axios.get(`${baseUrl}/users?page=${page}&count=${offset}`);
+    return data;
   } catch (error) {
     errorCatcher.reportError({ message: errorCatcher.getErrorMessage(error) });
   }

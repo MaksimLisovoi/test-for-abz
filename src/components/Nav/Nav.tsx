@@ -35,10 +35,18 @@ export const Nav = () => {
         />
       </Link>
       <Box display={'flex'}>
-        <ButtonPrimary sx={{ '&:not(:last-child)': { mr: '10px' } }} variant="contained">
+        <ButtonPrimary
+          href="#users"
+          sx={{ '&:not(:last-child)': { mr: '10px' } }}
+          variant="contained"
+        >
           Users
         </ButtonPrimary>
-        <ButtonPrimary sx={{ '&:not(:last-child)': { mr: '10px' } }} variant="contained">
+        <ButtonPrimary
+          href="#sign-up"
+          sx={{ '&:not(:last-child)': { mr: '10px' } }}
+          variant="contained"
+        >
           SignUp
         </ButtonPrimary>
       </Box>

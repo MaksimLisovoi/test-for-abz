@@ -1,3 +1,5 @@
+import { FieldErrors, UseFormRegister } from 'react-hook-form';
+
 export type User = {
   email: string;
   id: number;
@@ -16,6 +18,7 @@ export type UserState = {
   count: number;
   users: User[] | [];
   isLoading: boolean;
+  nextLink: string | null;
 };
 
 export type Position = {
@@ -39,4 +42,35 @@ export type formUserType = {
   phone: string;
   position_id: string;
   photo: Blob;
+};
+
+export type ReactHookFormRegisterType = UseFormRegister<{
+  name: string;
+  email: string;
+  phone: string;
+  position_id: string;
+  photo: FileList;
+}>;
+
+export type ReactHookFormErrorsType = FieldErrors<{
+  name: string;
+  email: string;
+  phone: string;
+  position_id: string;
+  photo: FileList;
+}>;
+
+export type PositionsBlockPropsType = {
+  register: ReactHookFormRegisterType;
+};
+
+export type TextFieldBlockProps = {
+  register: ReactHookFormRegisterType;
+  errors: ReactHookFormErrorsType;
+};
+
+export type fileBlockProps = {
+  register: ReactHookFormRegisterType;
+  errors: ReactHookFormErrorsType;
+  isSubmitSuccessful: boolean;
 };
