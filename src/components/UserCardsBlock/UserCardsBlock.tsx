@@ -28,7 +28,6 @@ export const UserCardsBlock = (): JSX.Element => {
     getUsersList(page, count).then(data => {
       setPageState(prevState => ({
         ...prevState,
-
         users: [...prevState.users, ...data.users],
         nextLink: data.links.next_url,
       }));
@@ -36,27 +35,14 @@ export const UserCardsBlock = (): JSX.Element => {
   }, [page, count]);
 
   useEffect(() => {
-    getUsersList(page, count).then(data => {
+    isMySuccessSubmit &&
       setPageState(prevState => ({
         ...prevState,
         page: 1,
         users: [],
-        nextLink: data.links.next_url,
       }));
-    });
     // setSubmitSuccessFalse();
   }, [isMySuccessSubmit]);
-
-  // useEffect(() => {
-  //   getUsersList(page, count).then(data => {
-  //     setPageState(prevState => ({
-  //       ...prevState,
-  //       page: isMySuccessSubmit ? 1 : prevState.page,
-  //       users: isMySuccessSubmit ? data.users : [...prevState.users, ...data.users],
-  //       nextLink: data.links.next_url,
-  //     }));
-  //   });
-  // }, [isMySuccessSubmit, page, count]);
 
   const handleShowMore = () => {
     setPageState(prevState => ({ ...prevState, page: prevState.page + 1 }));

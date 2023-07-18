@@ -20,6 +20,7 @@ export const Nav = () => {
       }}
     >
       <Link
+        href="/"
         sx={{
           height: 26,
         }}
