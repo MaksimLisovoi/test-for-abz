@@ -3,8 +3,6 @@ import { Background, HeroTextBlock } from '../Base.styled';
 
 import { ButtonPrimary } from '../ButtonPrimary';
 
-import './background.css';
-
 export const HeroSection = () => {
   return (
     <Background
