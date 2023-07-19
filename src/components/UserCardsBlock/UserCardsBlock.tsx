@@ -30,6 +30,7 @@ export const UserCardsBlock = (): JSX.Element => {
         page: 1,
       }));
     }
+
     setSubmitSuccessFalse();
   }, [isMySuccessSubmit]);
 
@@ -45,22 +46,6 @@ export const UserCardsBlock = (): JSX.Element => {
       }
     });
   }, [page, count]);
-
-  // useEffect(() => {
-  //   if (!isMySuccessSubmit) {
-  //     console.log('I`m first useEffect!');
-  //     getUsersList(page, count).then(data => {
-  //       if (data.success) {
-  //         setPageState(prevState => ({
-  //           ...prevState,
-  //           users: [...prevState.users, ...data.users],
-  //           nextLink: data.links.next_url,
-  //           isLoading: false,
-  //         }));
-  //       }
-  //     });
-  //   }
-  // }, [page, count, isMySuccessSubmit]);
 
   const handleShowMore = () => {
     setPageState(prevState => ({ ...prevState, page: prevState.page + 1 }));
@@ -86,7 +71,7 @@ export const UserCardsBlock = (): JSX.Element => {
           >
             {users &&
               users.map(user => (
-                <Grid2 xs={12} md={6} lg={4}>
+                <Grid2 key={user.id} xs={12} md={6} lg={4}>
                   <UserCard user={user} />
                 </Grid2>
               ))}

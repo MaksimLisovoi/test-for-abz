@@ -1,5 +1,5 @@
 import { Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Box, useTheme } from '@mui/system';
 import { ButtonPrimary } from '../Base.styled';
 import { useEffect, useState } from 'react';
 
@@ -13,13 +13,14 @@ import { FileInputBlock } from './FileInputBlock';
 import { SuccessImage } from './SuccessImage';
 import { useSuccessForm } from '../../context/submitFormCotext';
 import { createNewUser, getToken } from '../../services/userApi';
+import { Loader } from '../Loader/Loader';
 
 type RegisterInput = TypeOf<typeof registerSchema>;
 
 export const SignUpForm = (): JSX.Element => {
   const { setSubmitSuccessTrue } = useSuccessForm();
   const [shouldShowImg, setShouldShowImg] = useState(false);
-  // const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -39,21 +40,26 @@ export const SignUpForm = (): JSX.Element => {
   }, [isSubmitSuccessful]);
 
   const onSubmitHandler: SubmitHandler<RegisterInput> = data => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append('name', data.name);
     formData.append('email', data.email);
     formData.append('phone', data.phone);
     formData.append('position_id', data.position_id);
     formData.append('photo', data.photo[0]);
+
+    getToken().then(token => createNewUser(formData, token).then(() => setIsLoading(false)));
+
     setSubmitSuccessTrue();
     setShouldShowImg(true);
-    // getToken().then(token => createNewUser(formData, token));
   };
-
+  const theme = useTheme();
   return (
     <>
       {shouldShowImg ? (
         <SuccessImage />
+      ) : isLoading ? (
+        <Loader size={48} color={`${theme.palette.custom.accent}`} />
       ) : (
         <Box>
           <Typography
