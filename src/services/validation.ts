@@ -11,14 +11,12 @@ export const registerSchema = z.object({
     .nonempty('Name is required')
     .min(2, 'Name must be at least 2 characters')
     .max(60, 'Name must be less than 60 characters'),
-  email: z
-    .string()
-    .nonempty('Email is required!')
-    .min(2, 'Email must be at least 2 characters')
-    .max(100, 'Name must be less than 100 characters')
-    .regex(regex.emailRegex, 'Email must be a valid email!')
-    .email('Email is invalid!'),
-  phone: z.string().regex(regex.phoneRegex, 'Number format should be +38 (XXX) XXX - XX - XX'),
+  email: z.string().nonempty('Email is required!').min(2, 'Email must be at least 2 characters'),
+  // .max(100, 'Name must be less than 100 characters')
+  // .regex(regex.emailRegex, 'Email must be a valid email!')
+  // .email('Email is invalid!'),
+  phone: z.string(),
+  // .regex(regex.phoneRegex, 'Number format should be +38 (XXX) XXX - XX - XX'),
   position_id: z.string(),
   photo: z
     .instanceof(FileList)

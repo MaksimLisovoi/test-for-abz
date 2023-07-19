@@ -23,31 +23,28 @@ export const UserCardsBlock = (): JSX.Element => {
 
   const theme = useTheme();
 
-  console.log(isMySuccessSubmit);
-
   useEffect(() => {
     if (isMySuccessSubmit) {
       setPageState(prevState => ({
         ...prevState,
         page: 1,
-        users: [],
-        isLoading: false,
       }));
-
-      setSubmitSuccessFalse();
     }
+    setSubmitSuccessFalse();
+  }, [isMySuccessSubmit]);
 
+  useEffect(() => {
     getUsersList(page, count).then(data => {
       if (data.success) {
         setPageState(prevState => ({
           ...prevState,
-          users: [...prevState.users, ...data.users],
+          users: page === 1 ? data.users : [...prevState.users, ...data.users],
           nextLink: data.links.next_url,
           isLoading: false,
         }));
       }
     });
-  }, [isMySuccessSubmit, page, count]);
+  }, [page, count]);
 
   // useEffect(() => {
   //   if (!isMySuccessSubmit) {
