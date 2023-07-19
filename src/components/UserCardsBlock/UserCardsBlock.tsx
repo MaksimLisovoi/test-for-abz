@@ -26,50 +26,44 @@ export const UserCardsBlock = (): JSX.Element => {
   console.log(isMySuccessSubmit);
 
   useEffect(() => {
-    isMySuccessSubmit &&
+    if (isMySuccessSubmit) {
       setPageState(prevState => ({
         ...prevState,
         page: 1,
-        isLoading: true,
         users: [],
+        isLoading: false,
       }));
 
-    setSubmitSuccessFalse();
-
-    // isMySuccessSubmit &&
-    //   getUsersList(page, count).then(data => {
-    //     if (data.success) {
-    //       setPageState(prevState => ({
-    //         ...prevState,
-    //         users: data.users,
-    //         nextLink: data.links.next_url,
-    //         isLoading: false,
-    //       }));
-    //     }
-    // setSubmitSuccessFalse();
-    //   });
-  }, [isMySuccessSubmit]);
-
-  useEffect(() => {
-    // isMySuccessSubmit &&
-    //   setPageState(prevState => ({
-    //     ...prevState,
-    //     page: 1,
-    //     isLoading: true,
-    //     users: [],
-    //   }));
+      setSubmitSuccessFalse();
+    }
 
     getUsersList(page, count).then(data => {
       if (data.success) {
         setPageState(prevState => ({
           ...prevState,
-          users: !isMySuccessSubmit ? [...prevState.users, ...data.users] : data.users,
+          users: [...prevState.users, ...data.users],
           nextLink: data.links.next_url,
           isLoading: false,
         }));
       }
     });
-  }, [page, count, isMySuccessSubmit]);
+  }, [isMySuccessSubmit, page, count]);
+
+  // useEffect(() => {
+  //   if (!isMySuccessSubmit) {
+  //     console.log('I`m first useEffect!');
+  //     getUsersList(page, count).then(data => {
+  //       if (data.success) {
+  //         setPageState(prevState => ({
+  //           ...prevState,
+  //           users: [...prevState.users, ...data.users],
+  //           nextLink: data.links.next_url,
+  //           isLoading: false,
+  //         }));
+  //       }
+  //     });
+  //   }
+  // }, [page, count, isMySuccessSubmit]);
 
   const handleShowMore = () => {
     setPageState(prevState => ({ ...prevState, page: prevState.page + 1 }));
