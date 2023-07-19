@@ -47,7 +47,7 @@ export const SignUpForm = (): JSX.Element => {
     formData.append('photo', data.photo[0]);
     setSubmitSuccessTrue();
     setShouldShowImg(true);
-    getToken().then(token => createNewUser(formData, token));
+    // getToken().then(token => createNewUser(formData, token));
   };
 
   return (

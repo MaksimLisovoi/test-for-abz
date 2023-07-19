@@ -9,7 +9,7 @@ import { useSuccessForm } from '../../context/submitFormCotext';
 import { Loader } from '../Loader/Loader';
 
 export const UserCardsBlock = (): JSX.Element => {
-  const { isMySuccessSubmit } = useSuccessForm();
+  const { isMySuccessSubmit, setSubmitSuccessFalse } = useSuccessForm();
 
   const [pageState, setPageState] = useState<UserState>({
     page: 1,
@@ -24,6 +24,17 @@ export const UserCardsBlock = (): JSX.Element => {
   const theme = useTheme();
 
   useEffect(() => {
+    // setSubmitSuccessFalse();
+
+    isMySuccessSubmit &&
+      setPageState(prevState => ({
+        ...prevState,
+        page: 1,
+        users: [],
+      }));
+  }, [isMySuccessSubmit]);
+
+  useEffect(() => {
     getUsersList(page, count).then(data => {
       console.log(data);
       if (data.success) {
@@ -35,17 +46,7 @@ export const UserCardsBlock = (): JSX.Element => {
         }));
       }
     });
-  }, [page, count]);
-
-  useEffect(() => {
-    isMySuccessSubmit &&
-      setPageState(prevState => ({
-        ...prevState,
-        page: 1,
-        users: [],
-      }));
-    // setSubmitSuccessFalse();
-  }, [isMySuccessSubmit]);
+  }, [page, count, isMySuccessSubmit]);
 
   const handleShowMore = () => {
     setPageState(prevState => ({ ...prevState, page: prevState.page + 1 }));

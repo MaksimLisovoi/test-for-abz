@@ -49,7 +49,7 @@ export const HeroTextBlock = styled('div')(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
   flexDirection: 'column',
-  [theme.breakpoints.up('sm')]: {
+  [theme.breakpoints.up('xs')]: {
     marginTop: '40px',
     marginBottom: '71px',
   },
