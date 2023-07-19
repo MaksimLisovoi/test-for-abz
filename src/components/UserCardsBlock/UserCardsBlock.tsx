@@ -24,16 +24,42 @@ export const UserCardsBlock = (): JSX.Element => {
   const theme = useTheme();
 
   console.log(isMySuccessSubmit);
+
   useEffect(() => {
     isMySuccessSubmit &&
       setPageState(prevState => ({
         ...prevState,
         page: 1,
         isLoading: true,
+        users: [],
       }));
 
+    setSubmitSuccessFalse();
+
+    // isMySuccessSubmit &&
+    //   getUsersList(page, count).then(data => {
+    //     if (data.success) {
+    //       setPageState(prevState => ({
+    //         ...prevState,
+    //         users: data.users,
+    //         nextLink: data.links.next_url,
+    //         isLoading: false,
+    //       }));
+    //     }
+    // setSubmitSuccessFalse();
+    //   });
+  }, [isMySuccessSubmit]);
+
+  useEffect(() => {
+    // isMySuccessSubmit &&
+    //   setPageState(prevState => ({
+    //     ...prevState,
+    //     page: 1,
+    //     isLoading: true,
+    //     users: [],
+    //   }));
+
     getUsersList(page, count).then(data => {
-      console.log(data);
       if (data.success) {
         setPageState(prevState => ({
           ...prevState,
@@ -41,7 +67,6 @@ export const UserCardsBlock = (): JSX.Element => {
           nextLink: data.links.next_url,
           isLoading: false,
         }));
-        setSubmitSuccessFalse();
       }
     });
   }, [page, count, isMySuccessSubmit]);
